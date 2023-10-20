@@ -5,10 +5,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'scss/base/home.css' %}">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'scss/base/home.css' %}" />
+    <title>BuyInfo | Home</title>
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <!-- <meta http-equiv="refresh" content="1" /> -->
   </head>
   <body>
-    <h1>Hello World</h1>
+    <div class="main">{% include './components/sidebar.html' %}</div>
   </body>
 </html>

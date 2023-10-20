@@ -1,0 +1,13 @@
+.sidebar {
+  width: 160px;
+  height: calc(100vh - 20px);
+  background-color: #1a2133;
+  padding: 8px;
+}
+.sidebar .top {
+  display: flex;
+  align-items: center;
+}
+.sidebar .top .logo {
+  width: 50px;
+}/*# sourceMappingURL=sidebar.css.map */

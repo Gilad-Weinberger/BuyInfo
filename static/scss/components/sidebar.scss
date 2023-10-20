@@ -1,0 +1,15 @@
+$sidebar-bg-color: #1a2133;
+
+.sidebar{
+    width: 160px;
+    height: calc(100vh - 20px);
+    background-color: $sidebar-bg-color;
+    padding: 8px;
+    .top{
+        display: flex;
+        align-items: center;
+        .logo{
+            width: 50px;
+        }
+    }
+}
