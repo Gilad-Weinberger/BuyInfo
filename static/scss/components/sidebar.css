@@ -1,4 +1,5 @@
 .sidebar {
+  position: fixed;
   width: 160px;
   height: calc(100vh - 20px);
   background-color: #1a2133;

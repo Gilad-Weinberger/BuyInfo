@@ -2,6 +2,7 @@ $sidebar-bg-color: #1a2133;
 $border-color: white;
 
 .sidebar {
+  position: fixed;
   width: 160px;
   height: calc(100vh - 20px);
   background-color: $sidebar-bg-color;
