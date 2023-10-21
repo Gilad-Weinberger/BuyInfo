@@ -10,6 +10,27 @@
       <div class="top">
         <img src="{% static 'images/logo.png' %}" class="logo" alt="" />
       </div>
+      <div class="profile">
+        <img
+          src="{% static 'images/profile-image.jpeg' %}"
+          alt=""
+          class="profile-image"
+        />
+        <p class="name">גלעד וינברגר</p>
+      </div>
+      <div class="menu">
+        {% for item in sidebar_menu %}
+        <a class="item">
+          <div class="right">
+            <i class="icon {{ item.icon }}"></i>
+            <p class="text">{{ item.text }}</p>
+          </div>
+          {% if item.alerts_count != 0 %}
+          <p class="alert-count">{{ item.alerts_count }}</p>
+          {% endif %}
+        </a>
+        {% endfor %}
+      </div>
     </div>
   </body>
 </html>

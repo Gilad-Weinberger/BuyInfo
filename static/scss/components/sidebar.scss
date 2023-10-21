@@ -1,15 +1,65 @@
 $sidebar-bg-color: #1a2133;
+$border-color: white;
 
-.sidebar{
-    width: 160px;
-    height: calc(100vh - 20px);
-    background-color: $sidebar-bg-color;
-    padding: 8px;
-    .top{
-        display: flex;
-        align-items: center;
-        .logo{
-            width: 50px;
-        }
+.sidebar {
+  width: 160px;
+  height: calc(100vh - 20px);
+  background-color: $sidebar-bg-color;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  .top {
+    padding: 0px 0px 5px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .logo {
+      width: 60px;
     }
+  }
+  .profile {
+    padding: 10px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    .profile-image {
+      width: 50px;
+      border-radius: 50%;
+    }
+    .name {
+      color: white;
+    }
+  }
+  .menu {
+    padding: 10px;
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 18px 0px;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      &:nth-child(1) {
+        margin-top: 5px;
+      }
+      .right {
+        display: flex;
+        .icon {
+          margin-left: 10px;
+        }
+        .text {
+          margin: 0px;
+        }
+      }
+      .alert-count {
+        margin: 0px;
+        padding: 2px 5.5px;
+        background-color: red;
+        border-radius: 50%;
+        font-size: 12px;
+      }
+    }
+  }
 }

@@ -2,12 +2,61 @@
   width: 160px;
   height: calc(100vh - 20px);
   background-color: #1a2133;
-  padding: 8px;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .sidebar .top {
+  padding: 0px 0px 5px 0px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .sidebar .top .logo {
+  width: 60px;
+}
+.sidebar .profile {
+  padding: 10px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+.sidebar .profile .profile-image {
   width: 50px;
+  border-radius: 50%;
+}
+.sidebar .profile .name {
+  color: white;
+}
+.sidebar .menu {
+  padding: 10px;
+}
+.sidebar .menu .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 18px 0px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.sidebar .menu .item:nth-child(1) {
+  margin-top: 5px;
+}
+.sidebar .menu .item .right {
+  display: flex;
+}
+.sidebar .menu .item .right .icon {
+  margin-left: 10px;
+}
+.sidebar .menu .item .right .text {
+  margin: 0px;
+}
+.sidebar .menu .item .alert-count {
+  margin: 0px;
+  padding: 2px 5.5px;
+  background-color: red;
+  border-radius: 50%;
+  font-size: 12px;
 }/*# sourceMappingURL=sidebar.css.map */
