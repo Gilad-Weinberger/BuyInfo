@@ -1,4 +1,41 @@
+$page-bg-color: #e4ebf7;
+$box-bg-color: #f2f7fd;
+$text-color: #717477;
+
 body {
   margin: 0px;
   direction: rtl;
+}
+.main {
+  display: flex;
+  .container {
+    width: 100vw;
+    padding-right: 180px;
+    height: 2000px;
+    background-color: $page-bg-color;
+    .search-bar {
+      display: flex;
+      align-items: center;
+      position: fixed;
+      padding-bottom: 15px;
+      background-color: $page-bg-color;
+      i {
+        position: absolute;
+        color: $text-color;
+        right: 10px;
+        z-index: 1;
+      }
+      .search {
+        width: calc(100vw - 180px);
+        padding: 15px 35px 15px 10px;
+        background-color: $box-bg-color;
+        color: $text-color;
+        border: none;
+        unicode-bidi: initial;
+        direction: rtl;
+        font-weight: 600;
+        font-size: 15px;
+      }
+    }
+  }
 }

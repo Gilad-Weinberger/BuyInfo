@@ -34,12 +34,17 @@
       href="{% static 'images/logo.png' %}"
       type="image/x-icon"
     />
-    <meta http-equiv="refresh" content="1" />
+    <!-- <meta http-equiv="refresh" content="1" /> -->
   </head>
   <body>
     <div class="main">
       {% include './components/sidebar.html' %}
-      <div class="container"></div>
+      <div class="container">
+        <div class="search-bar">
+          <i class="fa-regular fa-magnifying-glass"></i>
+          <input type="search" class="search" name="search" id="" placeholder="חיפוש" />
+        </div>
+      </div>
     </div>
   </body>
 </html>

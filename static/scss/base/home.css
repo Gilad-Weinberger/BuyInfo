@@ -1,4 +1,38 @@
 body {
   margin: 0px;
   direction: rtl;
+}
+
+.main {
+  display: flex;
+}
+.main .container {
+  width: 100vw;
+  padding-right: 180px;
+  height: 2000px;
+  background-color: #e4ebf7;
+}
+.main .container .search-bar {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  padding-bottom: 15px;
+  background-color: #e4ebf7;
+}
+.main .container .search-bar i {
+  position: absolute;
+  color: #717477;
+  right: 10px;
+  z-index: 1;
+}
+.main .container .search-bar .search {
+  width: calc(100vw - 180px);
+  padding: 15px 35px 15px 10px;
+  background-color: #f2f7fd;
+  color: #717477;
+  border: none;
+  unicode-bidi: initial;
+  direction: rtl;
+  font-weight: 600;
+  font-size: 15px;
 }/*# sourceMappingURL=home.css.map */
