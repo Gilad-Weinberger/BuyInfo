@@ -10,6 +10,11 @@ def home(request):
     {'text': 'חשבונות', 'link': '/', 'icon': 'fa-regular fa-circle-user', 'alerts_count': 0},
     {'text': 'עזרה', 'link': '/', 'icon': 'fa-regular fa-circle-info', 'alerts_count': 0},
     ]
-    context = {"sidebar_menu": sidebar_menu}
+
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
+
+    context = {"sidebar_menu": sidebar_menu, "user": user}
 
     return render(request, 'base/home.html', context)

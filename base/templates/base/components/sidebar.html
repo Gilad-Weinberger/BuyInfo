@@ -16,7 +16,11 @@
           alt=""
           class="profile-image"
         />
-        <p class="name">גלעד וינברגר</p>
+        {% if user %}
+        <p class="name">{{ user.first_name }} {{user.last_name}}</p>
+        {% else %}
+        <p class="name">אורח</p>
+        {% endif %}
       </div>
       <div class="menu">
         {% for item in sidebar_menu %}
