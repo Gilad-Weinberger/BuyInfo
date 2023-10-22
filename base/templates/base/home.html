@@ -5,6 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       data-purpose="Layout StyleSheet"
@@ -27,6 +28,21 @@
       rel="stylesheet"
       href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-light.css"
     />
+    <!--Chart js-->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+      integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"
+      integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E="
+      crossorigin="anonymous"
+    />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- link css file -->
     <link rel="stylesheet" href="{% static 'scss/base/home.css' %}" />
     <title>BuyInfo | Home</title>
     <link
@@ -42,7 +58,16 @@
       <div class="container">
         <div class="search-bar">
           <i class="fa-regular fa-magnifying-glass"></i>
-          <input type="search" class="search" name="search" id="" placeholder="חיפוש" />
+          <input
+            type="search"
+            class="search"
+            name="search"
+            id=""
+            placeholder="חיפוש"
+          />
+        </div>
+        <div class="all-analysis">
+          {% include './components/analysis/expenses_distribution.html' %}
         </div>
       </div>
     </div>
