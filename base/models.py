@@ -19,5 +19,7 @@ class Expense(models.Model):
     def __str__(self):
         if self.description:
             return f"{self.user.first_name} {self.user.last_name} | {self.date} | {self.description}"
-        else:
+        elif self.type:
             return f"{self.user.first_name} {self.user.last_name} | {self.date} | {self.type}"
+        else:
+            return f"{self.user.first_name} {self.user.last_name} | {self.date}"
