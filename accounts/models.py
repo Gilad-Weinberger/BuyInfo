@@ -22,6 +22,10 @@ class User(models.Model):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class Family(models.Model):
     family_id = models.IntegerField(null=True, blank=True)
