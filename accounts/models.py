@@ -1,6 +1,8 @@
 from django.db import models
 from jsonfield import JSONField
 import os
+import json
+from django.conf import settings
 
 def profile_image_upload_path(instance, filename):
     filename, ext = os.path.splitext(filename)
@@ -15,11 +17,11 @@ class User(models.Model):
         null=True,
         blank=True,
         upload_to=profile_image_upload_path
-    )
-    expenses = JSONField(default={})
+    ) 
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
 
 class Family(models.Model):
     family_id = models.IntegerField(null=True, blank=True)

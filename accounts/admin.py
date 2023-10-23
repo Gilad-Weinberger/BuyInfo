@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import User
-from .forms import UserForm
+from django.contrib.auth.models import User
+from .models import Family
+from .forms import FamilyForm
 
-class UserAdmin(admin.ModelAdmin):
-    form = UserForm
+class FamilyAdmin(admin.ModelAdmin):
+    form = FamilyForm
 
-admin.site.register(User, UserAdmin)
+admin.site.register(Family, FamilyAdmin)
