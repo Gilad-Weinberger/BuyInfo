@@ -10,7 +10,7 @@ class Expense_type(models.Model):
 class Expense(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     description = models.CharField(max_length=200, blank=True)
-    type = models.ForeignKey(Expense_type, on_delete=models.SET_DEFAULT, default=1)
+    type = models.ForeignKey(Expense_type, on_delete=models.SET_NULL, null=True, blank=True)
     is_receipt = models.BooleanField(default=True)
     image = models.ImageField(blank=True, null=True)
     price = models.DecimalField(max_digits=15, decimal_places=2)
