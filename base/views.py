@@ -29,7 +29,10 @@ def home(request):
                 expenses_distribution[year] = {}
             if month not in expenses_distribution[year]:
                 expenses_distribution[year][month] = {}
-            expenses_distribution[year][month][day] = int(expense.price)
+            if day not in expenses_distribution[year][month]:
+                expenses_distribution[year][month][day] = int(expense.price)
+            else:
+                expenses_distribution[year][month][day] += int(expense.price)
     
     context = {
         "sidebar_menu": sidebar_menu,
