@@ -41,7 +41,11 @@ body {
 }
 .main .container .all-analysis .data-bar {
   display: flex;
+  max-height: 450px;
+  justify-content: space-between;
+  align-items: center;
 }
-.main .container .all-analysis .data-bar .right {
-  max-width: 50vw;
+.main .container .all-analysis .data-bar .right,
+.main .container .all-analysis .data-bar .left {
+  max-width: calc((100vw - 225px) / 2);
 }/*# sourceMappingURL=home.css.map */

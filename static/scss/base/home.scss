@@ -41,8 +41,12 @@ body {
       padding: 60px 15px;
       .data-bar {
         display: flex;
-        .right {
-          max-width: calc((100vw) / 2);
+        max-height: 450px;
+        justify-content: space-between;
+        align-items: center;
+        .right,
+        .left {
+          max-width: calc((100vw - 225px) / 2);
         }
       }
     }
