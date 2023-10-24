@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import User
 
 class Expense_type(models.Model):
     name = models.CharField(max_length=100)

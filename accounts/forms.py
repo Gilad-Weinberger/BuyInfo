@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
-from django.contrib.auth.models import User
+from .models import User
 from .models import Family
 
 class FamilyForm(forms.ModelForm):
