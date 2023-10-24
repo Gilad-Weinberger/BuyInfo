@@ -76,6 +76,18 @@
       calculateDatesLastWeek();
       calculateExpensesLastWeek();
 
+      const customCanvasBackgroundColor = {
+        id: "customCanvasBackgroundColor",
+        beforeDraw: (chart, args, options) => {
+          const { ctx } = chart;
+          ctx.save();
+          ctx.globalCompositeOperation = "destination-over";
+          ctx.fillStyle = options.color || "#99ffff";
+          ctx.fillRect(0, 0, chart.width, chart.height);
+          ctx.restore();
+        },
+      };
+
       new Chart(ctx, {
         type: "line",
         data: {
@@ -85,16 +97,71 @@
               label: "חלוקת הוצאות",
               data: expenses_data,
               borderWidth: 1,
+              backgroundColor: (context) => {
+                if (!context.chart.chartArea) {
+                  return;
+                }
+                const {
+                  ctx,
+                  data,
+                  chartArea: { top, bottom },
+                } = context.chart;
+                const gradientBg = ctx.createLinearGradient(0, top, 0, bottom);
+                gradientBg.addColorStop(0, "#fcb32f");
+                gradientBg.addColorStop(1, "#b923ad");
+                return gradientBg;
+              },
+              borderColor: "white",
+              tension: 0.3,
+              fill: true,
             },
           ],
         },
         options: {
           scales: {
+            x: {
+              grid: {
+                display: false,
+              },
+            },
             y: {
               beginAtZero: true,
+              grid: {
+                display: false,
+              },
+              ticks: {
+                callback: function (value, index, ticks) {
+                  return value + "₪";
+                },
+                color: "#000000",
+              },
+            },
+          },
+          plugins: {
+            customCanvasBackgroundColor: {
+              color: "#f2f7fd",
+            },
+            title: {
+              display: true,
+              text: "חלוקת הוצאות",
+              font: {
+                size: 20,
+              },
+            },
+            legend: {
+              display: false,
+            },
+            datalabels: {
+              anchor: "start",
+              align: "top",
+              formatter: Math.round,
+              font: {
+                weight: "bold",
+              },
             },
           },
         },
+        plugins: [customCanvasBackgroundColor],
       });
     </script>
   </body>
