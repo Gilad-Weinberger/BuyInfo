@@ -6,8 +6,8 @@ import os
 
 def profile_image_upload_path(instance, filename):
     filename, ext = os.path.splitext(filename)
-    new_filename = f"profile_{instance.username}{ext}"
-    return os.path.join('profile_images', new_filename)
+    new_filename = f"avatar_{instance.username}{ext}"
+    return os.path.join('avatars', new_filename)
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
