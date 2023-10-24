@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from collections import defaultdict
-from accounts.models import User
+from accounts.models import User, Family
 from base.models import Expense
+from django.db.models import Q
 
 def home(request):
     sidebar_menu = [
@@ -16,28 +17,39 @@ def home(request):
 
     user = None
     expenses_distribution = None
+    user_family = None
     if request.user.is_authenticated:
         user = request.user
+        user_family = Family.objects.filter(
+            Q(parents=user) | Q(kids=user)
+        ).first()
 
         user_expenses = Expense.objects.filter(user=user)
         expenses_distribution = {}
+        activities_track = {}
         for expense in user_expenses:
             year = expense.date.year
             month = expense.date.month
             day = expense.date.day
             if year not in expenses_distribution:
                 expenses_distribution[year] = {}
+                activities_track[year] = {}
             if month not in expenses_distribution[year]:
                 expenses_distribution[year][month] = {}
+                activities_track[year][month] = {}
             if day not in expenses_distribution[year][month]:
                 expenses_distribution[year][month][day] = int(expense.price)
+                activities_track[year][month][day] = 1
             else:
                 expenses_distribution[year][month][day] += int(expense.price)
+                activities_track[year][month][day] += 1
     
     context = {
         "sidebar_menu": sidebar_menu,
         "user": user,
-        "expenses_distribution": expenses_distribution,  
+        "user_family": user_family,
+        "expenses_distribution": expenses_distribution,
+        "activities_track": activities_track,
     }
 
     return render(request, 'base/home.html', context)

@@ -67,13 +67,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
-
-    def family(self):
-        self.family = None
-        self.family = Family.objects.filter(
-            Q(parents=self) | Q(kids=self)
-        ).first()
+    REQUIRED_FIELDS = []        
 
     def __str__(self):
         return f"{self.username} | {self.email}"
@@ -83,3 +77,6 @@ class Family(models.Model):
     name = models.CharField(max_length=50)
     parents = models.ManyToManyField(User, related_name='parents')
     kids = models.ManyToManyField(User, related_name='kids')
+
+    def __str__(self):
+        return f"{self.name}"

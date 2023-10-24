@@ -71,19 +71,41 @@
             <div class="right">
               {% include './components/analysis/expenses_distribution.html' %}
             </div>
-            <div class="left">
-
-            </div>
+            <div class="left"></div>
           </div>
           <div class="data-bar">
             <div class="right">
               <div class="family">
-                
+                <div class="top">
+                  <p class="title">משפחה</p>
+                  <p class="minimize">-</p>
+                </div>
+                {% if user_family %}
+                <div class="users">
+                  {% for user in user_family.parents.all %}
+                  <div class="user">
+                    <div class="details">
+                      <img src="{{user.avatar.url}}" alt="" />
+                      <p class="name">{{ user.first_name }}</p>
+                    </div>
+                    <i class="fa-solid fa-circle-star"></i>
+                  </div>
+                  {% endfor %} {% for user in user_family.kids.all %}
+                  <a class="user kid">
+                    <div class="details">
+                      <img src="{{user.avatar.url}}" alt="" />
+                      <p class="name">{{ user.first_name }}</p>
+                    </div>
+                  </a>
+                  {% endfor %}
+                </div>
+                {% else %}
+                <p class="">אין לך משפחה</p>
+                {% endif %}
               </div>
+              {% include './components/analysis/activities_track.html' %}
             </div>
-            <div class="left">
-              
-            </div>
+            <div class="left"></div>
           </div>
         </div>
       </div>

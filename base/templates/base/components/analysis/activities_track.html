@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <div class="activities_track">
+      <canvas class="activities_chart" width="450" height="280"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const dtx = document.getElementsByClassName("activities_chart");
+      var activities = "{{ activities_track }}";
+      console.log(activities);
+      const validJsonStr1 = activities.replace(/(\w+):/g, '"$1":');
+      activities = JSON.parse(validJsonStr1);
+      console.log(activities);
+      let activity_data = [];
+      let activity_dates = [];
+
+      const today = new Date();
+      let year = today.getFullYear();
+      let month = today.getMonth() + 1;
+      let day = today.getDate();
+
+      function calculateActivitiesCurrentMonth() {
+        const lastDayOfMonth = new Date(year, month, 0).getDate();
+
+        for (let i = 1; i <= lastDayOfMonth; i++) {
+          let dateString =
+            year +
+            "-" +
+            (month < 10 ? "0" : "") +
+            month +
+            "-" +
+            (i < 10 ? "0" : "") +
+            i;
+
+          if (
+            i <= day &&
+            activities[year] &&
+            activities[year][month] &&
+            activities[year][month][i]
+          ) {
+            activity_data.push(activities[year][month][i]);
+          } else {
+            activity_data.push(0);
+          }
+        }
+      }
+
+      function calculateDatesCurrentMonth() {
+        const lastDayOfMonth = new Date(
+          today.getFullYear(),
+          today.getMonth() + 1,
+          0
+        ).getDate();
+        for (let i = 1; i <= lastDayOfMonth; i++) {
+          activity_dates.push(i);
+        }
+      }
+
+      calculateDatesCurrentMonth();
+      calculateActivitiesCurrentMonth();
+
+      const plugin = {
+        id: "customCanvasBackgroundColor",
+        beforeDraw: (chart, args, options) => {
+          const { dtx } = chart;
+          dtx.save();
+          dtx.globalCompositeOperation = "destination-over";
+          dtx.fillStyle = options.color || "#99ffff";
+          dtx.fillRect(0, 0, chart.width, chart.height);
+          dtx.restore();
+        },
+      };
+
+      new Chart(dtx, {
+        type: "bar",
+        data: {
+          labels: activity_dates,
+          datasets: [
+            {
+              label: "פעילות יומית",
+              data: activity_data,
+              backgroundColor: (context) => {
+                const dataIndex = context.dataIndex;
+                return dataIndex === day - 1 ? "#f25f64" : "#59a5d8";
+              },
+              borderColor: "white",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            x: {
+              grid: {
+                display: false,
+              },
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                display: false,
+              },
+              ticks: {
+                stepSize: 1,
+              },
+            },
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: "פעילות יומית",
+              font: {
+                size: 20,
+              },
+            },
+            legend: {
+              display: false,
+            },
+            datalabels: {
+              anchor: "start",
+              align: "top",
+              formatter: Math.round,
+              font: {
+                weight: "bold",
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

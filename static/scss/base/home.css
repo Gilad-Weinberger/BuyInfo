@@ -44,8 +44,69 @@ body {
   max-height: 450px;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 15px;
 }
 .main .container .all-analysis .data-bar .right,
 .main .container .all-analysis .data-bar .left {
   max-width: calc((100vw - 225px) / 2);
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right {
+  display: flex;
+  justify-content: space-between;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family {
+  min-height: 260px;
+  max-height: 260px;
+  overflow-y: auto;
+  min-width: calc((100vw - 225px) / 8);
+  background-color: #f2f7fd;
+  padding: 10px 10px 10px 15px;
+  margin-left: 15px;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  border-bottom: 1.5px solid #e4ebf7;
+  padding-bottom: 8px;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .top .title {
+  margin: 0px;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .top .minimize {
+  margin: 0px;
+  padding: 1px 7px;
+  background-color: #e4ebf7;
+  border-radius: 50%;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .users {
+  padding-top: 10px;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .users .user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .users .user.kid {
+  cursor: pointer;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .users .user .details {
+  display: flex;
+  align-items: center;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .users .user .details img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .users .user .details .name {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .users .user .fa-circle-star {
+  color: green;
+  font-size: 23px;
 }/*# sourceMappingURL=home.css.map */
