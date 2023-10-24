@@ -3,8 +3,99 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link
+      rel="stylesheet"
+      href="{% static 'scss/components/expenses_distribution.css' %}"
+    />
   </head>
   <body>
-    
+    <div class="expenses_distribution">
+      <canvas class="chart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementsByClassName("chart");
+      var expenses_distribution = "{{ expenses_distribution }}";
+      console.log(expenses_distribution);
+      const validJsonStr = expenses_distribution.replace(/(\w+):/g, '"$1":');
+      expenses_distribution = JSON.parse(validJsonStr);
+      let expenses_data = [];
+      let dates = [];
+      function calculateExpensesLastWeek() {
+        const today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let day = today.getDate();
+
+        for (let i = 0; i < 7; i++) {
+          let dateString =
+            year +
+            "-" +
+            (month < 10 ? "0" : "") +
+            month +
+            "-" +
+            (day < 10 ? "0" : "") +
+            day;
+
+          if (
+            expenses_distribution[year] &&
+            expenses_distribution[year][month] &&
+            expenses_distribution[year][month][day]
+          ) {
+            expenses_data.push(expenses_distribution[year][month][day]);
+          } else {
+            expenses_data.push(0);
+          }
+
+          day--;
+          if (day === 0) {
+            month--;
+            if (month === 0) {
+              year--;
+              month = 12;
+            }
+            const lastDayOfPreviousMonth = new Date(year, month, 0).getDate();
+            day = lastDayOfPreviousMonth;
+          }
+        }
+        expenses_data.reverse();
+      }
+      function calculateDatesLastWeek() {
+        const today = new Date();
+        const lastWeek = new Date(today);
+        lastWeek.setDate(today.getDate() - 7);
+
+        for (let i = 1; i < 8; i++) {
+          const date = new Date(lastWeek);
+          date.setDate(lastWeek.getDate() + i);
+          dates.push(date.toDateString().split(" ")[0]);
+        }
+      }
+
+      calculateDatesLastWeek();
+      calculateExpensesLastWeek();
+
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: dates,
+          datasets: [
+            {
+              label: "Expenses Distribution",
+              data: expenses_data,
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
   </body>
 </html>

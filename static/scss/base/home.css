@@ -9,7 +9,7 @@ body {
 .main .container {
   width: 100vw;
   padding-right: 180px;
-  height: 2000px;
+  min-height: 100vh;
   background-color: #e4ebf7;
 }
 .main .container .search-bar {
@@ -35,4 +35,7 @@ body {
   direction: rtl;
   font-weight: 600;
   font-size: 15px;
+}
+.main .container .all-analysis {
+  padding: 60px 15px;
 }/*# sourceMappingURL=home.css.map */

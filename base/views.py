@@ -20,11 +20,21 @@ def home(request):
         user = request.user
 
         user_expenses = Expense.objects.filter(user=user)
-        expenses_distribution = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+        expenses_distribution = {}
         for expense in user_expenses:
-            year, month, day = expense.date.year, expense.date.month, expense.date.day
-            expenses_distribution[year][month][day] += expense.price
-
-    context = {"sidebar_menu": sidebar_menu, "user": user, "expenses_distribution": expenses_distribution}
+            year = expense.date.year
+            month = expense.date.month
+            day = expense.date.day
+            if year not in expenses_distribution:
+                expenses_distribution[year] = {}
+            if month not in expenses_distribution[year]:
+                expenses_distribution[year][month] = {}
+            expenses_distribution[year][month][day] = int(expense.price)
+    
+    context = {
+        "sidebar_menu": sidebar_menu,
+        "user": user,
+        "expenses_distribution": expenses_distribution,  
+    }
 
     return render(request, 'base/home.html', context)
