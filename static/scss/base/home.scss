@@ -39,6 +39,12 @@ body {
     }
     .all-analysis {
       padding: 60px 15px;
+      .data-bar {
+        display: flex;
+        .right {
+          max-width: calc((100vw) / 2);
+        }
+      }
     }
   }
 }

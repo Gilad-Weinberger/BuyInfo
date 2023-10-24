@@ -38,4 +38,10 @@ body {
 }
 .main .container .all-analysis {
   padding: 60px 15px;
+}
+.main .container .all-analysis .data-bar {
+  display: flex;
+}
+.main .container .all-analysis .data-bar .right {
+  max-width: 50vw;
 }/*# sourceMappingURL=home.css.map */

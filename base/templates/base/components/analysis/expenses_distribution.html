@@ -17,7 +17,6 @@
     <script>
       const ctx = document.getElementsByClassName("chart");
       var expenses_distribution = "{{ expenses_distribution }}";
-      console.log(expenses_distribution);
       const validJsonStr = expenses_distribution.replace(/(\w+):/g, '"$1":');
       expenses_distribution = JSON.parse(validJsonStr);
       let expenses_data = [];
