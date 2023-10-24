@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from collections import defaultdict
-from django.contrib.auth.models import User
-from .models import Expense
+from accounts.models import User
+from base.models import Expense
 
 def home(request):
     sidebar_menu = [

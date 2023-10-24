@@ -6,7 +6,7 @@ import os
 
 def profile_image_upload_path(instance, filename):
     filename, ext = os.path.splitext(filename)
-    new_filename = f"profile_{instance.email}{ext}"
+    new_filename = f"profile_{instance.username}{ext}"
     return os.path.join('profile_images', new_filename)
 
 class CustomUserManager(BaseUserManager):
@@ -69,8 +69,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
+    def family(self):
+        self.family = None
+        self.family = Family.objects.filter(
+            Q(parents=self) | Q(kids=self)
+        ).first()
+
     def __str__(self):
-        return f"{self.username}"
+        return f"{self.username} | {self.email}"
 
 class Family(models.Model):
     family_id = models.IntegerField(null=True, blank=True)

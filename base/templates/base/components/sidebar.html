@@ -11,14 +11,15 @@
         <img src="{% static 'images/logo.png' %}" class="logo" alt="" />
       </div>
       <div class="profile">
+        {% if user %}
+        <img src="{{ user.avatar.url }}" alt="אווטאר" class="profile-image" />
+        <p class="name">{{ user.first_name }} {{user.last_name}}</p>
+        {% else %}
         <img
-          src="{% static 'images/profile-image.jpeg' %}"
+          src="{% static 'images/logo.jpeg' %}"
           alt=""
           class="profile-image"
         />
-        {% if user %}
-        <p class="name">{{ user.first_name }} {{user.last_name}}</p>
-        {% else %}
         <p class="name">אורח</p>
         {% endif %}
       </div>
