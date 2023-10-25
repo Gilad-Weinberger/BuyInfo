@@ -62,6 +62,7 @@ body {
   background-color: #f2f7fd;
   padding: 10px 10px 10px 15px;
   margin-left: 15px;
+  position: relative;
 }
 .main .container .all-analysis .data-bar:nth-child(2) .right .family .top {
   display: flex;
@@ -109,4 +110,15 @@ body {
 .main .container .all-analysis .data-bar:nth-child(2) .right .family .users .user .fa-circle-star {
   color: green;
   font-size: 23px;
+}
+.main .container .all-analysis .data-bar:nth-child(2) .right .family .add {
+  text-decoration-line: none;
+  color: white;
+  background-color: lightgreen;
+  padding: 7px 13px;
+  border-radius: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  bottom: 8px;
+  right: 24px;
 }/*# sourceMappingURL=home.css.map */

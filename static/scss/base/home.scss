@@ -61,6 +61,7 @@ body {
               background-color: $box-bg-color;
               padding: 10px 10px 10px 15px;
               margin-left: 15px;
+              position: relative;
               .top {
                 display: flex;
                 align-items: center;
@@ -107,6 +108,17 @@ body {
                     font-size: 23px;
                   }
                 }
+              }
+              .add {
+                text-decoration-line: none;
+                color: white;
+                background-color: lightgreen;
+                padding: 7px 13px;
+                border-radius: 15px;
+                font-family: Arial, Helvetica, sans-serif;
+                position: absolute;
+                bottom: 8px;
+                right: 24px;
               }
             }
           }
