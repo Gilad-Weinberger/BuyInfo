@@ -2,7 +2,8 @@ from django.shortcuts import render
 from collections import defaultdict
 from accounts.models import User, Family
 from base.models import Expense
-from django.db.models import Q
+from django.db.models import Q, Sum
+from django.utils import timezone
 
 def home(request):
     sidebar_menu = [
@@ -18,6 +19,7 @@ def home(request):
     user = None
     expenses_distribution = None
     user_family = None
+    popular_topics_list = None
     if request.user.is_authenticated:
         user = request.user
         user_family = Family.objects.filter(
@@ -43,13 +45,24 @@ def home(request):
             else:
                 expenses_distribution[year][month][day] += int(expense.price)
                 activities_track[year][month][day] += 1
-    
+        
+        current_month = timezone.now().month  
+        current_month_expenses = user_expenses.filter(date__month=current_month)
+        popular_topics = current_month_expenses.values('type__name').annotate(total_spent=Sum('price')).order_by('-total_spent')[:3]
+        popular_topics_list = [
+            {
+            'topic': topic['type__name'],  
+            'amountSpent': topic['total_spent']  
+            } for topic in popular_topics
+        ]
+
     context = {
         "sidebar_menu": sidebar_menu,
         "user": user,
         "user_family": user_family,
         "expenses_distribution": expenses_distribution,
         "activities_track": activities_track,
+        "popular_topics_list": popular_topics_list
     }
 
     return render(request, 'base/home.html', context)

@@ -15,10 +15,8 @@
     <script>
       const dtx = document.getElementsByClassName("activities_chart");
       var activities = "{{ activities_track }}";
-      console.log(activities);
       const validJsonStr1 = activities.replace(/(\w+):/g, '"$1":');
       activities = JSON.parse(validJsonStr1);
-      console.log(activities);
       let activity_data = [];
       let activity_dates = [];
 

@@ -68,8 +68,12 @@
         for (let i = 1; i < 8; i++) {
           const date = new Date(lastWeek);
           date.setDate(lastWeek.getDate() + i);
-          dates.push(date.toDateString().split(" ")[0]);
+          let date_to_add_top = date.toDateString().split(" ")[0];
+          let date_to_add_bottom = date.toDateString().split(" ").slice(1, 3);
+          dates.push(`${date_to_add_top}\n${date_to_add_bottom}`);
         }
+
+        console.log(dates);
       }
 
       calculateDatesLastWeek();

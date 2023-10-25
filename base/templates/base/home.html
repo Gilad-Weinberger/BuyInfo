@@ -50,7 +50,7 @@
       href="{% static 'images/logo.png' %}"
       type="image/x-icon"
     />
-    <meta http-equiv="refresh" content="1" />
+    <!-- <meta http-equiv="refresh" content="1" /> -->
   </head>
   <body>
     <div class="main">
@@ -78,7 +78,7 @@
               <div class="family">
                 <div class="top">
                   <p class="title">משפחה</p>
-                  <p class="minimize">-</p>
+                  <p class="minimize" onclick="toggleUsers();">-</p>
                 </div>
                 {% if user_family %}
                 <div class="users">
@@ -111,5 +111,25 @@
         </div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".minimize").click(function () {
+          var usersDiv = $(".users");
+          var minimizeText = $(".minimize");
+          var addBtn = $(".add");
+
+          if (usersDiv.hasClass("hide")) {
+            usersDiv.removeClass("hide");
+            addBtn.removeClass("hide");
+            minimizeText.text("-");
+          } else {
+            usersDiv.addClass("hide");
+            addBtn.addClass("hide");
+            minimizeText.text("+");
+          }
+        });
+      });
+    </script>
   </body>
 </html>

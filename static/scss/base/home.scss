@@ -6,6 +6,12 @@ body {
   margin: 0px;
   direction: rtl;
 }
+.hide {
+  display: none;
+}
+.hide ~ .family {
+  min-height: 0px;
+}
 .main {
   display: flex;
   .container {
@@ -78,6 +84,7 @@ body {
                   padding: 1px 7px;
                   background-color: $page-bg-color;
                   border-radius: 50%;
+                  cursor: pointer;
                 }
               }
               .users {

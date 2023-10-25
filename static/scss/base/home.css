@@ -3,6 +3,14 @@ body {
   direction: rtl;
 }
 
+.hide {
+  display: none;
+}
+
+.hide ~ .family {
+  min-height: 0px;
+}
+
 .main {
   display: flex;
 }
@@ -81,6 +89,7 @@ body {
   padding: 1px 7px;
   background-color: #e4ebf7;
   border-radius: 50%;
+  cursor: pointer;
 }
 .main .container .all-analysis .data-bar:nth-child(2) .right .family .users {
   padding-top: 10px;
