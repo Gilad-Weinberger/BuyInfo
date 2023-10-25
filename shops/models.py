@@ -1,3 +1,3 @@
 from django.db import models
-
-# Create your models here.
+from base.models import Expense, Expense_type
+from accounts.models import User
