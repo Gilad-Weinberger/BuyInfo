@@ -57,7 +57,7 @@ body {
               min-height: 260px;
               max-height: 260px;
               overflow-y: auto;
-              min-width: calc((100vw - 225px) / 8);
+              width: calc((100vw - 225px) / 10);
               background-color: $box-bg-color;
               padding: 10px 10px 10px 15px;
               margin-left: 15px;
