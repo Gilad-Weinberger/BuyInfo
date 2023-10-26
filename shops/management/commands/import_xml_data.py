@@ -12,11 +12,12 @@ class Command(BaseCommand):
             tree = ET.parse(xml_file_path)
             root = tree.getroot()
 
+            shops_net = Shops_net.objects.first()
             shop_name = root.find('StoreId').text  # Extract shop name from XML
             shop, created = Shop.objects.get_or_create(
                 shop_id=root.find('StoreId').text,
                 name=shop_name,  # Set the shop name based on the XML data
-                shops_net=Shops_net.objects.first(),
+                shops_net=shops_net,
             )
 
             for item_elem in root.find('Items').iter('Item'):
@@ -73,7 +74,7 @@ class Command(BaseCommand):
                     print("Invalid UnitOfMeasure value in XML")
 
                 product = Product.objects.create(
-                    shop=shop,
+                    shops_net=shops_net,
                     code=item_elem.find('ItemCode').text,
                     name=item_elem.find('ItemName').text,
                     measurement_unit=measurement_unit,
