@@ -51,12 +51,11 @@ body {
   display: flex;
   max-height: 450px;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 15px;
 }
 .main .container .all-analysis .data-bar .right,
 .main .container .all-analysis .data-bar .left {
-  max-width: calc((100vw - 225px) / 2);
+  width: calc((100vw - 245px) / 2);
 }
 .main .container .all-analysis .data-bar:nth-child(2) .right {
   display: flex;
@@ -66,7 +65,7 @@ body {
   min-height: 260px;
   max-height: 260px;
   overflow-y: auto;
-  width: calc((100vw - 225px) / 10);
+  width: calc((100vw - 245px) / 10);
   background-color: #f2f7fd;
   padding: 10px 10px 10px 15px;
   margin-left: 15px;

@@ -63,7 +63,7 @@
             class="search"
             name="search"
             id=""
-            placeholder="חיפוש"
+            placeholder="חיפוש..."
           />
         </div>
         <div class="all-analysis">
@@ -71,7 +71,9 @@
             <div class="right">
               {% include './components/analysis/expenses_distribution.html' %}
             </div>
-            <div class="left"></div>
+            <div class="left">
+              {% include './components/analysis/recent_receipt.html' %}
+            </div>
           </div>
           <div class="data-bar">
             <div class="right">

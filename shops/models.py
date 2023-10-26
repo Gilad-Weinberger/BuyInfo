@@ -8,10 +8,10 @@ def shops_net_logo_upload_path(instance, filename):
     new_filename = f"net_{instance.name}{ext}"
     return os.path.join('shops_net_logos', new_filename)
 
-def recipet_image_upload_path(instance, filename):
+def receipt_image_upload_path(instance, filename):
     filename, ext = os.path.splitext(filename)
-    new_filename = f"recipet_{instance.name}{ext}"
-    return os.path.join('recipet_images', new_filename)
+    new_filename = f"receipt_{instance.id}{ext}"
+    return os.path.join('receipt_images', new_filename)
 
 class Shops_net(models.Model):
     id = models.AutoField(primary_key=True)
@@ -37,10 +37,6 @@ class Shop(models.Model):
     
     def __str__(self):
         return f"{self.shops_net} ({self.shop_id}) -- {self.name}"
-
-class Recipet(models.Model):
-    id = models.AutoField(primary_key=True)
-    image = models.ImageField(upload_to=recipet_image_upload_path)
 
 class Measurement_unit(models.Model):
     name = models.CharField(max_length=30, unique=True)
@@ -74,8 +70,19 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name} - {self.price} | {self.shops_net}"
 
-class RecipetProduct(models.Model):
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
-    recipet = models.ForeignKey(Recipet, on_delete=models.CASCADE)
+
+class Receipt(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    id = models.AutoField(primary_key=True)
+    image = models.ImageField(upload_to=receipt_image_upload_path)
+    date = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def products(self):
+        return receiptProduct.objects.filter(id=self.id)
+
+class ReceiptProduct(models.Model):
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True)
+    receipt = models.ForeignKey(Receipt, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     count = models.IntegerField(default=1)

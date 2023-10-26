@@ -1,0 +1,43 @@
+$page-bg-color: #e4ebf7;
+$box-bg-color: #f2f7fd;
+$text-color: #717477;
+
+.recent-recipet {
+  background-color: $box-bg-color;
+  font-family: Arial, Helvetica, sans-serif;
+  .top {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0px;
+    .title {
+      margin: 0px;
+    }
+  }
+  .middle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    .profile {
+      background-color: blue;
+      width: 25%;
+      display: flex;
+      align-items: center;
+      padding: 5px 15px;
+      .image {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        margin-left: 8px;
+      }
+      .name {
+        margin: 0px;
+      }
+    }
+    .recipet-details {
+      background-color: green;
+      width: 74%;
+      display: flex;
+      min-height: 50px;
+    }
+  }
+}

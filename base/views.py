@@ -2,6 +2,7 @@ from django.shortcuts import render
 from collections import defaultdict
 from accounts.models import User, Family
 from base.models import Expense
+from shops.models import Receipt
 from django.db.models import Q, Sum
 from django.utils import timezone
 
@@ -20,6 +21,8 @@ def home(request):
     expenses_distribution = None
     user_family = None
     popular_topics_list = None
+    recent_receipt = None
+    activities_track = None
     if request.user.is_authenticated:
         user = request.user
         user_family = Family.objects.filter(

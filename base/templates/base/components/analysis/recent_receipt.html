@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="{% static 'scss/components/recent_receipt.css' %}"
+    />
+  </head>
+  <body>
+    <div class="recent-recipet">
+      <div class="top">
+        <p class="title">חשבונית</p>
+      </div>
+      <div class="middle">
+        <div class="profile">
+          <img src="{{user.avatar.url}}" alt="" class="image" />
+          <p class="name">{{ user.full_name }}</p>
+        </div>
+        <div class="recipet-details">
+            <div class="text">סניף</div>
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" placeholder="חיפוש...">
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

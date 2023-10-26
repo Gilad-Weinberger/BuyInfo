@@ -5,8 +5,12 @@ from shops.models import Shops_net, Shop, Recipet, Measurement_unit, Unit_of_mea
 class Command(BaseCommand):
     help = 'Import XML data into Django models'
 
+    def add_arguments(self, parser):
+        parser.add_argument('file_number', type=int, help='The file number to import (e.g., 049)')
+
     def handle(self, *args, **options):
-        xml_file_path = 'data_files/xml_data/PriceFull_RamiLevi_049.xml'
+        file_number = str(options['file_number']).zfill(3)  # Ensure it has 3 characters with leading zeros
+        xml_file_path = f'data_files/xml_data/PriceFull_RamiLevi_{file_number}.xml'
 
         try:
             tree = ET.parse(xml_file_path)

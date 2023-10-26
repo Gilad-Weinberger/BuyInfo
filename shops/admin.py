@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Shops_net, Shop, Recipet, Measurement_unit, Unit_of_measurement, Product, RecipetProduct
+from .models import Shops_net, Shop, Receipt, Measurement_unit, Unit_of_measurement, Product, ReceiptProduct
+from django.utils.translation import gettext as _
 
 class ShopAdmin(admin.ModelAdmin):
     search_fields = ['name', 'shops_net__name']
@@ -7,10 +8,22 @@ class ShopAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ['name', 'shops_net__name']
 
+class ReceiptProductAdmin(admin.ModelAdmin):
+    actions = ['duplicate_selected']
+
+    def duplicate_selected(self, request, queryset):
+        for receipt_product in queryset:
+            receipt_product.pk = None
+            receipt_product.save()
+
+        self.message_user(request, _('{} receiptProduct(s) were duplicated successfully.'.format(len(queryset))))
+
+    duplicate_selected.short_description = _("Duplicate selected ReceiptProducts")
+
 admin.site.register(Shops_net)
 admin.site.register(Shop, ShopAdmin)
-admin.site.register(Recipet)
+admin.site.register(Receipt)
 admin.site.register(Measurement_unit)
 admin.site.register(Unit_of_measurement)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(RecipetProduct)
+admin.site.register(ReceiptProduct, ReceiptProductAdmin)
