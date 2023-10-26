@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = 'Import XML data into Django models'
 
     def handle(self, *args, **options):
-        xml_file_path = 'data_files/xml_data/PriceFull_RamiLevi_029.xml'
+        xml_file_path = 'data_files/xml_data/PriceFull_RamiLevi_049.xml'
 
         try:
             tree = ET.parse(xml_file_path)
@@ -84,7 +84,7 @@ class Command(BaseCommand):
                     unit_of_measurement_price=float(item_elem.find('UnitOfMeasurePrice').text),
                 )
 
-                print(f"{item_elem.find('ItemName').text} item was created successfully")
+                self.stdout.write(self.style.SUCCESS(f"{item_elem.find('ItemName').text} item was created successfully"))
 
             self.stdout.write(self.style.SUCCESS('XML data imported successfully'))
 

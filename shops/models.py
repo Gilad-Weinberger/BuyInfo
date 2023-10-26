@@ -75,6 +75,7 @@ class Product(models.Model):
         return f"{self.name} - {self.price} | {self.shops_net}"
 
 class RecipetProduct(models.Model):
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     recipet = models.ForeignKey(Recipet, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     count = models.IntegerField(default=1)
