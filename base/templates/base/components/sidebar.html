@@ -13,7 +13,7 @@
       <div class="profile">
         {% if user %}
         <img src="{{ user.avatar.url }}" alt="אווטאר" class="profile-image" />
-        <p class="name">{{ user.first_name }} {{user.last_name}}</p>
+        <p class="name">{{ user.full_name}}</p>
         {% else %}
         <img
           src="{% static 'images/logo.jpeg' %}"
