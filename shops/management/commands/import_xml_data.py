@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 import xml.etree.ElementTree as ET
-from shops.models import Shops_net, Shop, Recipet, Measurement_unit, Unit_of_measurement, Product, RecipetProduct
+from shops.models import Shops_net, Shop, Measurement_unit, Unit_of_measurement, Product
 
 class Command(BaseCommand):
     help = 'Import XML data into Django models'
