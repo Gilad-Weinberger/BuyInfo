@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = 'Import XML data into Django models'
 
     def handle(self, *args, **options):
-        xml_file_path = 'data_files/xml_data/PriceFull1.xml'
+        xml_file_path = 'data_files/xml_data/PriceFull_RamiLevi_029.xml'
 
         try:
             tree = ET.parse(xml_file_path)

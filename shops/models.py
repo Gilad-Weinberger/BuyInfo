@@ -57,7 +57,7 @@ class Unit_of_measurement(models.Model):
 
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    shops_net = models.ForeignKey(Shops_net, on_delete=models.CASCADE)
     code = models.CharField(max_length=20)
     name = models.CharField(max_length=150)
     measurement_unit = models.ForeignKey(Measurement_unit, on_delete=models.CASCADE)
@@ -72,7 +72,7 @@ class Product(models.Model):
         return (calculation >= -1 and calculation <= 1)
 
     def __str__(self):
-        return f"{self.name} - {self.price} | {self.shop.shops_net}"
+        return f"{self.name} - {self.price} | {self.shops_net}"
 
 class RecipetProduct(models.Model):
     recipet = models.ForeignKey(Recipet, on_delete=models.CASCADE)
