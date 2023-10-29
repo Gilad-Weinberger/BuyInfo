@@ -18,13 +18,44 @@
           <img src="{{user.avatar.url}}" alt="" class="image" />
           <p class="name">{{ user.full_name }}</p>
         </div>
-        <div class="recipet-details">
-            <div class="text">סניף</div>
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" placeholder="חיפוש...">
-            </div>
+        <div class="buy-details">
+          <div class="text">
+            סניף {{ recent_receipt.shop }}, {{ recent_receipt.date }}
+          </div>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="חיפוש..." />
+          </div>
         </div>
+      </div>
+      <div class="bottom">
+        <div class="receipt-details"></div>
+        <table class="receipt-products">
+          {% for receipt_product in recent_receipt.receipt_products %}
+          <tr class="product">
+            <td class="star-td">
+              <form class="favorite-product" action="" method="post">
+                {% csrf_token %}
+                <button type="submit">
+                  <i class="fa-regular fa-star"></i>
+                </button>
+              </form>
+            </td>
+            <td class="name-td">
+              <p class="name">{{ receipt_product.product.name }}</p>
+            </td>
+            <td class="category-td">
+              <p class="category">{{ receipt_product.category }}</p>
+            </td>
+            <td class="count-td">
+              <p class="count">{{ receipt_product.count }}</p>
+            </td>
+            <td class="price-td">
+              <p class="price">{{ receipt_product.product.price }}</p>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
       </div>
     </div>
   </body>

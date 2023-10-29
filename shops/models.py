@@ -72,17 +72,17 @@ class Product(models.Model):
 
 
 class Receipt(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=receipt_image_upload_path)
     date = models.DateTimeField(auto_now_add=True)
 
     @property
-    def products(self):
-        return receiptProduct.objects.filter(id=self.id)
+    def receipt_products(self):
+        return ReceiptProduct.objects.filter(receipt=self)
 
 class ReceiptProduct(models.Model):
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True)
     receipt = models.ForeignKey(Receipt, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     count = models.IntegerField(default=1)

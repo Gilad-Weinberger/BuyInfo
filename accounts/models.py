@@ -36,7 +36,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=True,
         blank=True,
         upload_to=profile_image_upload_path
-    ) 
+    )
+    favorite_products = models.ManyToManyField('shops.Product', related_name="favorite_products")
 
     is_staff = models.BooleanField(
         _('staff status'),

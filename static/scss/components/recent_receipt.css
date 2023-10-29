@@ -14,9 +14,11 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  color: white;
 }
 .recent-recipet .middle .profile {
-  background-color: blue;
+  background-color: #56a4e1;
   width: 25%;
   display: flex;
   align-items: center;
@@ -31,9 +33,74 @@
 .recent-recipet .middle .profile .name {
   margin: 0px;
 }
-.recent-recipet .middle .recipet-details {
-  background-color: green;
-  width: 74%;
+.recent-recipet .middle .buy-details {
+  background-color: #57c158;
+  width: 67.7%;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   min-height: 50px;
+  padding: 0px 15px;
+}
+.recent-recipet .middle .buy-details .text {
+  font-size: 12px;
+}
+.recent-recipet .middle .buy-details .search-box {
+  display: flex;
+  align-items: center;
+}
+.recent-recipet .middle .buy-details .search-box i {
+  margin-left: -23px;
+  z-index: 1;
+  font-size: 14px;
+}
+.recent-recipet .middle .buy-details .search-box input {
+  padding: 6px 30px 6px 10px;
+  border-radius: 20px;
+  border: none;
+  background-color: #87d18b;
+  color: white;
+}
+.recent-recipet .middle .buy-details .search-box input::-moz-placeholder {
+  color: white;
+}
+.recent-recipet .middle .buy-details .search-box input::placeholder {
+  color: white;
+}
+.recent-recipet .bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.recent-recipet .bottom .receipt-details {
+  width: 28.62%;
+}
+.recent-recipet .bottom .receipt-products {
+  width: 71.28%;
+}
+.recent-recipet .bottom .receipt-products .product {
+  height: 25px;
+  border: 1px solid black;
+  width: 100%;
+}
+.recent-recipet .bottom .receipt-products .product .star-td {
+  width: 16px;
+}
+.recent-recipet .bottom .receipt-products .product .star-td button {
+  padding: 0px;
+  border: none;
+  background-color: none;
+  cursor: pointer;
+}
+.recent-recipet .bottom .receipt-products .product .star-td button i {
+  color: red;
+}
+.recent-recipet .bottom .receipt-products .product .name-td .name {
+  margin: 0px;
+}
+.recent-recipet .bottom .receipt-products .product .count-td .count {
+  margin: 0px;
+}
+.recent-recipet .bottom .receipt-products .product .price-td .price {
+  margin: 0px;
 }/*# sourceMappingURL=recent_receipt.css.map */

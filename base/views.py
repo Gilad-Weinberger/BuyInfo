@@ -59,13 +59,16 @@ def home(request):
             } for topic in popular_topics
         ]
 
+        recent_receipt = Receipt.objects.filter(user=user).order_by('-date').first()
+
     context = {
         "sidebar_menu": sidebar_menu,
         "user": user,
         "user_family": user_family,
         "expenses_distribution": expenses_distribution,
         "activities_track": activities_track,
-        "popular_topics_list": popular_topics_list
+        "popular_topics_list": popular_topics_list,
+        "recent_receipt": recent_receipt,
     }
 
     return render(request, 'base/home.html', context)
