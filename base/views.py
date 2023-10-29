@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from collections import defaultdict
 from accounts.models import User, Family
@@ -8,6 +9,7 @@ from shops.models import Product, Receipt
 from django.db.models import Q, Sum
 from django.utils import timezone
 
+@login_required
 def home(request):
     sidebar_menu = [
         {'text': 'בית', 'link': '/', 'icon': 'fa-regular fa-house', 'alerts_count': 0},

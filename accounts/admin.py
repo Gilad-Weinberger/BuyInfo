@@ -4,6 +4,7 @@ from .forms import UserForm, FamilyForm
 
 class UserAdmin(admin.ModelAdmin):
     form = UserForm
+    autocomplete_fields = ["favorite_products"]
 
 class FamilyAdmin(admin.ModelAdmin):
     form = FamilyForm
