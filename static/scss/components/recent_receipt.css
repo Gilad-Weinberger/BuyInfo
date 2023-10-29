@@ -92,6 +92,9 @@
   background-color: none;
   cursor: pointer;
 }
+.recent-recipet .bottom .receipt-products .product .star-td button p {
+  display: none;
+}
 .recent-recipet .bottom .receipt-products .product .star-td button i {
   color: red;
 }

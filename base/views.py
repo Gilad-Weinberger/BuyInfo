@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from collections import defaultdict
 from accounts.models import User, Family
 from base.models import Expense
-from shops.models import Receipt
+from shops.models import Product, Receipt
 from django.db.models import Q, Sum
 from django.utils import timezone
 
@@ -23,6 +25,7 @@ def home(request):
     popular_topics_list = None
     recent_receipt = None
     activities_track = None
+    all_user_receipts = None
     if request.user.is_authenticated:
         user = request.user
         user_family = Family.objects.filter(
@@ -59,7 +62,24 @@ def home(request):
             } for topic in popular_topics
         ]
 
+        for receipt in user.all_user_receipts:
+            receipt.reduce_receipt_products()
+        all_user_receipts = user.all_user_receipts
+
         recent_receipt = Receipt.objects.filter(user=user).order_by('-date').first()
+
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        if product_id:
+            try:
+                product = Product.objects.get(pk=product_id)
+                if product in user.favorite_products.all():
+                    user.favorite_products.remove(product)
+                else:
+                    user.favorite_products.add(product)
+                return HttpResponseRedirect(reverse('base:home'))
+            except Product.DoesNotExist:
+                pass
 
     context = {
         "sidebar_menu": sidebar_menu,
@@ -69,6 +89,7 @@ def home(request):
         "activities_track": activities_track,
         "popular_topics_list": popular_topics_list,
         "recent_receipt": recent_receipt,
+        "all_user_receipts": all_user_receipts,
     }
 
     return render(request, 'base/home.html', context)

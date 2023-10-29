@@ -34,10 +34,19 @@
           {% for receipt_product in recent_receipt.receipt_products %}
           <tr class="product">
             <td class="star-td">
-              <form class="favorite-product" action="" method="post">
+              <form class="favorite-product" method="post">
                 {% csrf_token %}
+                <input
+                  type="hidden"
+                  name="product_id"
+                  value="{{ receipt_product.product.id }}"
+                />
                 <button type="submit">
+                  {% if receipt_product.product in user.favorite_products.all %}
+                  <i class="fa-solid fa-star"></i>
+                  {% else %}
                   <i class="fa-regular fa-star"></i>
+                  {% endif %}
                 </button>
               </form>
             </td>
@@ -51,7 +60,7 @@
               <p class="count">{{ receipt_product.count }}</p>
             </td>
             <td class="price-td">
-              <p class="price">{{ receipt_product.product.price }}</p>
+              <p class="price">{{ receipt_product.total_price }}</p>
             </td>
           </tr>
           {% endfor %}

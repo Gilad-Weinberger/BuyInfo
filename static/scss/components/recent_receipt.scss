@@ -87,6 +87,9 @@ $text-color: #717477;
             border: none;
             background-color: none;
             cursor: pointer;
+            p{
+              display: none;
+            }
             i {
               color: red;
             }

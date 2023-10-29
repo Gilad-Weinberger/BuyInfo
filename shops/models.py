@@ -81,8 +81,36 @@ class Receipt(models.Model):
     @property
     def receipt_products(self):
         return ReceiptProduct.objects.filter(receipt=self)
+    
+    def __str__(self):
+        return f"{self.user} | {self.shop} | {self.date}"
+
+    def reduce_receipt_products(self):
+        # Get all unique products in the receipt
+        products_in_receipt = self.receipt_products.values_list('product', flat=True).distinct()
+
+        # Reduce products for each unique product
+        for product_id in products_in_receipt:
+            products_to_reduce = self.receipt_products.filter(product_id=product_id)
+
+            if products_to_reduce.count() > 1:
+                total_count = products_to_reduce.aggregate(models.Sum('count'))['count__sum']
+
+                # Keep the first receipt product and update its count
+                first_product = products_to_reduce.first()
+                first_product.count = total_count
+                first_product.save()
+
+                # Delete the remaining receipt products
+                products_to_reduce.exclude(pk=first_product.pk).delete()
 
 class ReceiptProduct(models.Model):
     receipt = models.ForeignKey(Receipt, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     count = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.product} x{self.count}"
+
+    def total_price(self):
+        return self.count * self.product.price

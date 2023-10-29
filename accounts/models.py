@@ -38,6 +38,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         upload_to=profile_image_upload_path
     )
     favorite_products = models.ManyToManyField('shops.Product', related_name="favorite_products")
+    
+    @property
+    def all_user_receipts(self):
+        return self._meta.get_field('receipt').related_model.objects.filter(user=self)
 
     is_staff = models.BooleanField(
         _('staff status'),
@@ -77,10 +81,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f"{self.username} | {self.email}"
 
 class Family(models.Model):
-    family_id = models.IntegerField(null=True, blank=True)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     parents = models.ManyToManyField(User, related_name='parents')
     kids = models.ManyToManyField(User, related_name='kids')
 
     def __str__(self):
         return f"{self.name}"
+
+    def all_parents(self):
+        return self.parents.all()
+    
+    def all_kids(self):
+        return self.kids.all()
