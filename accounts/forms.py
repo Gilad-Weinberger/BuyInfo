@@ -36,12 +36,11 @@ class FamilyForm(forms.ModelForm):
             self.fields['kids'].queryset = User.objects.exclude(id__in=family_instance.parents.all())
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField()
-    profile_image = forms.ImageField() 
+    email = forms.EmailField(max_length=254, help_text='Required. Enter a valid email address.')
 
     class Meta:
-        model = User 
-        fields = ['email', 'first_name', 'last_name', 'password1', 'password2', 'profile_image']
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2', 'avatar')
         
 
 class UserChangeForm(forms.ModelForm):

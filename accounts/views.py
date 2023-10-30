@@ -21,11 +21,11 @@ def edit_profile(request):
 
 def register(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = RegistrationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('index')  # Redirect to the home page after successful registration
+            return redirect('base:home')
     else:
         form = RegistrationForm()
         

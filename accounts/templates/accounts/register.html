@@ -1,0 +1,83 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      data-purpose="Layout StyleSheet"
+      title="Web Awesome"
+      href="/css/app-wa-02670e9412103b5852dcbe140d278c49.css?vsn=d"
+    />
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-solid.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-regular.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-light.css"
+    />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- link css file -->
+    <link rel="stylesheet" href="{% static 'scss/accounts/login.css' %}" />
+    <title>BuyInfo | Register</title>
+    <link
+      rel="shortcut icon"
+      href="{% static 'images/logo.png' %}"
+      type="image/x-icon"
+    />
+    <!-- <meta http-equiv="refresh" content="1" /> -->
+  </head>
+  <body>
+    <div class="main">
+      <div class="login">
+        <h1>הרשמה</h1>
+        <form class="form" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">שם משתמש:</label>
+            <p>{{ form.username }}</p>
+          </div>
+          <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">דוא"ל:</label>
+            <p>{{ form.email }}</p>
+          </div>
+          <div class="form-group">
+            <label for="{{ form.first_name.id_for_label }}">שם פרטי:</label>
+            <p>{{ form.first_name }}</p>
+          </div>
+          <div class="form-group">
+            <label for="{{ form.last_name.id_for_label }}">שם משפחה:</label>
+            <p>{{ form.last_name }}</p>
+          </div>
+          <div class="form-group">
+            <label for="{{ form.avatar.id_for_label }}">תמונת פרופיל:</label>
+            <p>{{ form.avatar }}</p>
+          </div>
+          <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">סיסמה:</label>
+            <p>{{ form.password1 }}</p>
+          </div>
+          <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">אימות סיסמה:</label>
+            <p>{{ form.password2 }}</p>
+          </div>
+          <button class="submit" type="submit">הירשם</button>
+        </form>
+        <p>כבר יש לך חשבון? <a href="{% url 'accounts:login' %}">התחבר</a></p>
+      </div>
+    </div>
+  </body>
+</html>
