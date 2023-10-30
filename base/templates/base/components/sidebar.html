@@ -25,7 +25,7 @@
       </div>
       <div class="menu">
         {% for item in sidebar_menu %}
-        <a class="item">
+        <a href="{% url 'accounts:logout' %}" class="item">
           <div class="right">
             <i class="icon {{ item.icon }}"></i>
             <p class="text">{{ item.text }}</p>

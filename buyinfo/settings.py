@@ -133,7 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-LOGIN_URL = 'login'  # URL name for the login view
-LOGOUT_URL = 'logout'  # URL name for the logout view
-LOGIN_REDIRECT_URL = 'home'  # URL where the user will be redirected after login
-LOGOUT_REDIRECT_URL = 'login' # URL where the user will be redirected after logout
+LOGIN_URL = 'accounts:login'  # URL name for the login view
+LOGOUT_URL = 'accounts:logout'  # URL name for the logout view
+LOGIN_REDIRECT_URL = 'base:home'  # URL where the user will be redirected after login
+LOGOUT_REDIRECT_URL = 'base:home' # URL where the user will be redirected after logout
