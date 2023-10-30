@@ -1,0 +1,79 @@
+body {
+  margin: 0px;
+}
+.main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+  background: url("/static/images/login-bg.png") no-repeat fixed;
+  background-size: cover;
+  cursor: default;
+  .login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    padding: 80px 60px 60px 60px;
+    background-image: linear-gradient(
+        90deg,
+        #fff 12px,
+        0,
+        #c7a076 15px,
+        0,
+        #f5cea4 20px,
+        0,
+        #fff 100%
+      ),
+      radial-gradient(
+        circle closest-side,
+        rgba(255, 255, 255, 0) 88%,
+        #fff 100%
+      ),
+      radial-gradient(
+        circle at 22px 8px,
+        #f5cea4 40%,
+        #c7a076 40%,
+        #c7a076 100%
+      );
+    background-size: 32px 8px, 32px 16px, 32px 16px;
+    background-repeat: space no-repeat;
+    background-position: center top, center 6px, center 6px;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      height: 25px;
+      width: 100%;
+      left: 0;
+      bottom: -25px;
+      background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/23618/rip.svg)
+        bottom;
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .form-group {
+        p {
+          margin: 8px 0px 25px 0px;
+          input {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1.5px solid #927555;
+          }
+        }
+      }
+      .submit {
+        padding: 8px 15px;
+        background-color: #f5cea4;
+        border: 1px solid #927555;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+}
