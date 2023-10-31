@@ -3,18 +3,6 @@ from base.models import Expense, Expense_type
 from accounts.models import User
 from decimal import Decimal
 import os
-import PyPDF2
-
-def extract_text_from_pdf(pdf_file):
-    with open(pdf_file, 'rb') as pdf:
-        reader = PyPDF2.PdfFileReader(pdf, strict=False)
-        pdf_text = []
-
-        for page in reader.pages:
-            content= page.extract_text()
-            pdf_text.append(content)
-
-        return pdf_text
 
 def shops_net_logo_upload_path(instance, filename):
     filename, ext = os.path.splitext(filename)
