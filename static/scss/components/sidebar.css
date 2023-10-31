@@ -27,8 +27,16 @@
   width: 50px;
   border-radius: 50%;
 }
-.sidebar .profile .name {
+.sidebar .profile .details .name {
   color: white;
+  margin: 0px 0px 10px 0px;
+}
+.sidebar .profile .details .logout {
+  color: white;
+  text-decoration: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 3px 5px;
 }
 .sidebar .menu {
   padding: 10px;

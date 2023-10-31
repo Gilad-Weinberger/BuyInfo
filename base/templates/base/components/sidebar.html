@@ -13,7 +13,10 @@
       <div class="profile">
         {% if user %}
         <img src="{{ user.avatar.url }}" alt="אווטאר" class="profile-image" />
-        <p class="name">{{ user.full_name}}</p>
+        <div class="details">
+          <p class="name">{{ user.full_name}}</p>
+          <a class="logout" href="{% url 'accounts:logout' %}">התנתק</a>
+        </div>
         {% else %}
         <img
           src="{% static 'images/logo.jpeg' %}"
@@ -25,7 +28,7 @@
       </div>
       <div class="menu">
         {% for item in sidebar_menu %}
-        <a href="{% url 'accounts:logout' %}" class="item">
+        <a href="" class="item">
           <div class="right">
             <i class="icon {{ item.icon }}"></i>
             <p class="text">{{ item.text }}</p>
