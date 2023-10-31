@@ -3,6 +3,18 @@ from base.models import Expense, Expense_type
 from accounts.models import User
 from decimal import Decimal
 import os
+import PyPDF2
+
+def extract_text_from_pdf(pdf_file):
+    with open(pdf_file, 'rb') as pdf:
+        reader = PyPDF2.PdfFileReader(pdf, strict=False)
+        pdf_text = []
+
+        for page in reader.pages:
+            content= page.extract_text()
+            pdf_text.append(content)
+
+        return pdf_text
 
 def shops_net_logo_upload_path(instance, filename):
     filename, ext = os.path.splitext(filename)
@@ -108,22 +120,16 @@ class Receipt(models.Model):
         return f"{self.user} | {self.shop} | {self.date}"
 
     def reduce_receipt_products(self):
-        # Get all unique products in the receipt
         products_in_receipt = self.receipt_products.values_list('product', flat=True).distinct()
 
-        # Reduce products for each unique product
         for product_id in products_in_receipt:
             products_to_reduce = self.receipt_products.filter(product_id=product_id)
 
             if products_to_reduce.count() > 1:
                 total_count = products_to_reduce.aggregate(models.Sum('count'))['count__sum']
-
-                # Keep the first receipt product and update its count
                 first_product = products_to_reduce.first()
                 first_product.count = total_count
                 first_product.save()
-
-                # Delete the remaining receipt products
                 products_to_reduce.exclude(pk=first_product.pk).delete()
 
 class ReceiptProduct(models.Model):
