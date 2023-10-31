@@ -1,6 +1,7 @@
 from django.db import models
 from base.models import Expense, Expense_type
 from accounts.models import User
+from decimal import Decimal
 import os
 
 def shops_net_logo_upload_path(instance, filename):
@@ -37,6 +38,13 @@ class Shop(models.Model):
     
     def __str__(self):
         return f"{self.shops_net} ({self.shop_id}) -- {self.name}"
+
+class Payment_type(models.Model):
+    name = models.CharField(max_length=50)
+    icon_class = models.CharField(max_length=300)
+    
+    def __str__(self):
+        return self.name
 
 class Measurement_unit(models.Model):
     name = models.CharField(max_length=30, unique=True)
@@ -76,11 +84,19 @@ class Receipt(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=receipt_image_upload_path)
+    payment_type = models.ForeignKey(Payment_type, on_delete=models.CASCADE, default=1)
     date = models.DateTimeField(auto_now_add=True)
 
     @property
     def receipt_products(self):
         return ReceiptProduct.objects.filter(receipt=self)
+    
+    @property
+    def total_price(self):
+        total = Decimal(0)
+        for receipt_product in self.receipt_products:
+            total += receipt_product.total_price()
+        return total
     
     def __str__(self):
         return f"{self.user} | {self.shop} | {self.date}"

@@ -71,13 +71,13 @@ $text-color: #717477;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding-bottom: 5px;
     .receipt-details {
       width: 28.62%;
     }
     .receipt-products {
       width: calc(100% - (28.62% + 0.1%));
       .product {
-        height: 25px;
         border: 1px solid black;
         width: 100%;
         .star-td {
@@ -87,7 +87,7 @@ $text-color: #717477;
             border: none;
             background-color: none;
             cursor: pointer;
-            p{
+            p {
               display: none;
             }
             i {
@@ -110,6 +110,27 @@ $text-color: #717477;
             margin: 0px;
           }
         }
+      }
+    }
+  }
+  .final {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-top: 1px solid black;
+    padding-top: 2px;
+    .detail {
+      display: flex;
+      align-items: center;
+      margin: 10px 0px;
+      i {
+        color: #56a4e1;
+        font-size: 30px;
+        margin-left: 15px;
+      }
+      .text {
+        margin: 0px;
+        font-size: 22px;
       }
     }
   }

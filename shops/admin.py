@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Shops_net, Shop, Receipt, Measurement_unit, Unit_of_measurement, Product, ReceiptProduct
+from .models import Shops_net, Shop, Receipt, Payment_type, Measurement_unit, Unit_of_measurement, Product, ReceiptProduct
 from django.utils.translation import gettext as _
 
 class ShopAdmin(admin.ModelAdmin):
@@ -23,6 +23,7 @@ class ReceiptProductAdmin(admin.ModelAdmin):
 admin.site.register(Shops_net)
 admin.site.register(Shop, ShopAdmin)
 admin.site.register(Receipt)
+admin.site.register(Payment_type)
 admin.site.register(Measurement_unit)
 admin.site.register(Unit_of_measurement)
 admin.site.register(Product, ProductAdmin)

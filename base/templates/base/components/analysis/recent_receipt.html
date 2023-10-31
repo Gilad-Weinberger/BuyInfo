@@ -66,6 +66,26 @@
           {% endfor %}
         </table>
       </div>
+      <div class="final">
+        <div class="detail">
+          <i class="{{ recent_receipt.payment_type.icon_class }}"></i>
+          <p class="text">{{ recent_receipt.payment_type.name }}</p>
+        </div>
+        <div class="detail">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <p class="text">{{ recent_receipt.total_price }}₪</p>
+        </div>
+      </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const productCount =
+          "{{ recent_receipt.receipt_products.count|add:0 }}";
+        const height = productCount * 30;
+        const recentReceipt = document.querySelector(".receipt-products");
+        recentReceipt.style.height = `${height}px`;
+      });
+    </script>
   </body>
 </html>

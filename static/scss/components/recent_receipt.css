@@ -71,6 +71,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  padding-bottom: 5px;
 }
 .recent-recipet .bottom .receipt-details {
   width: 28.62%;
@@ -79,7 +80,6 @@
   width: 71.28%;
 }
 .recent-recipet .bottom .receipt-products .product {
-  height: 25px;
   border: 1px solid black;
   width: 100%;
 }
@@ -106,4 +106,25 @@
 }
 .recent-recipet .bottom .receipt-products .product .price-td .price {
   margin: 0px;
+}
+.recent-recipet .final {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-top: 1px solid black;
+  padding-top: 2px;
+}
+.recent-recipet .final .detail {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+}
+.recent-recipet .final .detail i {
+  color: #56a4e1;
+  font-size: 30px;
+  margin-left: 15px;
+}
+.recent-recipet .final .detail .text {
+  margin: 0px;
+  font-size: 22px;
 }/*# sourceMappingURL=recent_receipt.css.map */
