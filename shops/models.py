@@ -11,8 +11,13 @@ def shops_net_logo_upload_path(instance, filename):
 
 def receipt_image_upload_path(instance, filename):
     filename, ext = os.path.splitext(filename)
-    new_filename = f"receipt_{instance.id}{ext}"
-    return os.path.join('receipt_images', new_filename)
+    new_filename = f"receipt_{instance.user}{instance.date}{ext}"
+    return os.path.join('receipts/images', new_filename)
+
+def receipt_pdf_upload_path(instance, filename):
+    filename, ext = os.path.splitext(filename)
+    new_filename = f"receipt_{instance.user}{instance.date}{ext}"
+    return os.path.join('receipts/pdfs', new_filename)
 
 class Shops_net(models.Model):
     id = models.AutoField(primary_key=True)
@@ -83,6 +88,7 @@ class Receipt(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    pdf = models.FileField(upload_to=receipt_pdf_upload_path)
     image = models.ImageField(upload_to=receipt_image_upload_path)
     payment_type = models.ForeignKey(Payment_type, on_delete=models.CASCADE, default=1)
     date = models.DateTimeField(auto_now_add=True)
