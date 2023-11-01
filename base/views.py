@@ -8,15 +8,15 @@ from base.models import Expense
 from shops.models import Product, Receipt
 from django.db.models import Q, Sum
 from django.utils import timezone
-import PyPDF2, io, re
-import pytesseract
+import PyPDF2, io, re, requests, os, pytesseract
 from PIL import Image
 
+os.environ['TESSDATA_PREFIX'] = 'C:/Program Files/Tesseract-OCR/tessdata'
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 def extract_text_from_image_receipt(image_file, output_file_path):
     img = Image.open(image_file)
-    image_text = pytesseract.image_to_string(img)
+    image_text = pytesseract.image_to_string(img, lang='heb')
 
     with open(output_file_path, 'w', encoding='utf-8') as text_file:
             text_file.write(image_text)
@@ -109,14 +109,14 @@ def home(request):
         if 'pdf_file' in request.FILES:
             pdf_file = request.FILES['pdf_file']
             if pdf_file.name.endswith('.pdf'):
-                output_file_path = 'file.txt'
+                output_file_path = 'file_pdf.txt'
                 receipt_text = extract_text_from_pdf_receipt(pdf_file, output_file_path)
                 print(receipt_text)
             return HttpResponseRedirect(reverse('base:home'))         
         elif 'image_file' in request.FILES:
             image_file = request.FILES['image_file']
             if image_file.name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp')):
-                output_file_path = 'file.txt'
+                output_file_path = 'file_iamge.txt'
                 receipt_text = extract_text_from_image_receipt(image_file, output_file_path)
             return HttpResponseRedirect(reverse('base:home'))
 
