@@ -108,7 +108,22 @@
               </div>
               {% include './components/analysis/activities_track.html' %}
             </div>
-            <div class="left"></div>
+            <div class="left">
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="pdf_file" accept=".pdf" />
+                <button type="submit" name="pdf_submit">Upload PDF</button>
+              </form>
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input
+                  type="file"
+                  name="image_file"
+                  accept=".png, .jpg, .jpeg, .gif, .bmp"
+                />
+                <button type="submit" name="image_submit">Upload Image</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

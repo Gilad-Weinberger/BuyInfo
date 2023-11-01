@@ -8,18 +8,38 @@ from base.models import Expense
 from shops.models import Product, Receipt
 from django.db.models import Q, Sum
 from django.utils import timezone
-import PyPDF2
+import PyPDF2, io, re
+import pytesseract
+from PIL import Image
 
-def extract_text_from_pdf(pdf_file):
-    with open(pdf_file, 'rb') as pdf:
-        reader = PyPDF2.PdfFileReader(pdf, strict=False)
-        pdf_text = []
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
-        for page in reader.pages:
-            content= page.extract_text()
-            pdf_text.append(content)
+def extract_text_from_image_receipt(image_file, output_file_path):
+    img = Image.open(image_file)
+    image_text = pytesseract.image_to_string(img)
 
-        return pdf_text
+    with open(output_file_path, 'w', encoding='utf-8') as text_file:
+            text_file.write(image_text)
+
+    return image_text
+
+def extract_text_from_pdf_receipt(pdf_file, output_file_path):
+    pdf_text = []
+    pdf_content = pdf_file.read()
+    pdf_file.close()
+
+    pdf_file = PyPDF2.PdfReader(io.BytesIO(pdf_content), strict=False)
+
+    for page in pdf_file.pages:
+        page_text = page.extract_text()
+        cleaned_text = re.sub(r'\s+', ' ', page_text).strip()
+        pdf_text.append(cleaned_text)
+
+    with open(output_file_path, 'w', encoding='utf-8') as text_file:
+        text_file.write('\n'.join(pdf_text))
+    
+    final_pdf_text = '\n'.join(pdf_text)
+    return final_pdf_text
 
 @login_required
 def home(request):
@@ -86,6 +106,19 @@ def home(request):
                 return HttpResponseRedirect(reverse('base:home'))
             except Product.DoesNotExist:
                 pass
+        if 'pdf_file' in request.FILES:
+            pdf_file = request.FILES['pdf_file']
+            if pdf_file.name.endswith('.pdf'):
+                output_file_path = 'file.txt'
+                receipt_text = extract_text_from_pdf_receipt(pdf_file, output_file_path)
+                print(receipt_text)
+            return HttpResponseRedirect(reverse('base:home'))         
+        elif 'image_file' in request.FILES:
+            image_file = request.FILES['image_file']
+            if image_file.name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp')):
+                output_file_path = 'file.txt'
+                receipt_text = extract_text_from_image_receipt(image_file, output_file_path)
+            return HttpResponseRedirect(reverse('base:home'))
 
     context = {
         "sidebar_menu": sidebar_menu,
